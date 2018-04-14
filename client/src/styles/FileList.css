@@ -1,0 +1,23 @@
+#fileListGrid {
+    width: 90%;
+    margin-left: 5%;
+    transform: translateY(-10px);
+}
+
+.fileListPaper {
+    padding: 16px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 90%;
+    margin-left: 5%;
+    transform: translateY(-10px);
+}
+
+#fileListTopBackground {
+    background: #03A9F4;
+    height: 3vh;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}

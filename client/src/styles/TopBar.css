@@ -1,0 +1,11 @@
+#topBar {
+    height: 20vh;
+    display: flex;
+    align-items: center;
+}
+
+#topBarHead {
+    margin-left: 5%;
+    font-weight: 300;
+    color: #fff;
+}
