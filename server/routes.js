@@ -1,34 +1,83 @@
-const upload  = require('multer')();
-const path = require('path');
+const fs = require('fs');
+const multer = require('multer');
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${file.originalname}-${Date.now()}`);
+  }
+});
+const upload = multer({storage});
 
 module.exports = (app) => {
+  const storage = require('../index').storage;
+
   // Get list of all files
   app.get('/api/files/', (req, res) => {
-    res.json(app.locals.files);
+    getFileArrayFromStorage(storage)
+        .then(files => res.json(files))
+        .catch(err => res.send(err));
+  });
+
+  // Download file
+  app.get('/api/file/:fileId', (req, res) => {
+    storage.get(req.params.fileId)
+        .then(fileObject => {
+          const options = {
+            headers: {
+              'Content-type': fileObject.mimetype
+            }
+          };
+          res.download(fileObject.path, fileObject.originalname, options);
+        })
   });
 
   // Upload
   app.post('/api/files/', upload.single("file"), (req, res) => {
-    try{
-      app.locals.files.push({...req.file, id: app.locals.files.length});
-      res.json(app.locals.files.slice(-1)[0]);
-      app.locals.io.emit('file list update', JSON.stringify(app.locals.files));
-    } catch(e){
+    try {
+      storage.setItem(app.locals.fileCount.toString(), {...req.file, id: app.locals.fileCount});
+      app.locals.fileCount++;
+
+      getFileArrayFromStorage(storage)
+          .then(files => {
+            app.locals.io.emit('file list update', JSON.stringify(files));
+          })
+          .catch(err => res.send(err));
+
+      res.sendStatus(201);
+    } catch (e) {
       res.send(e);
     }
   });
 
   // Delete
   app.delete('/api/file/:fileId', (req, res) => {
-    const fileIdToDelete = parseInt(req.params.fileId);
-    for (let i = 0; i < app.locals.files.length; i++){
-      const currentFile = app.locals.files[i];
-      if(currentFile.id === fileIdToDelete){
-        app.locals.files.splice(i, 1);
-        break;
-      }
-    }
-    app.locals.io.emit('file list update', JSON.stringify(app.locals.files));
-    res.sendStatus(204);
+    storage.removeItem(req.params.fileId);
+    getFileArrayFromStorage(storage).then(files => {
+      app.locals.io.emit('file list update', JSON.stringify(files));
+      res.sendStatus(204);
+    })
   });
+};
+
+const isPreviewableImage = (file) => {
+  const validSize = file.size < (2 * 1024 * 1024); // < 2MB
+  const validMimeType = file.mimetype.split("/")[0] === "image";
+  return validSize && validMimeType;
+};
+
+const getFileArrayFromStorage = (storage) => {
+  return storage.values()
+      .then(filesObject => {
+        return Object.values(filesObject).map(file => {
+          const sendData = isPreviewableImage(file);
+          if (sendData) {
+            const buffer = fs.readFileSync(file.path);
+            file.buffer = buffer;
+          }
+
+          return file;
+        })
+      });
 };

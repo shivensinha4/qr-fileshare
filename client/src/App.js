@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import TopBar from './components/TopBar';
 import UploadFileButton from './components/UploadFIleButton';
 import FileList from './components/FileList';
+import FileDownloadForm from './components/FileDownloadForm';
 import {MuiThemeProvider, createMuiTheme} from 'material-ui/styles';
 import blue from 'material-ui/colors/blue';
 import io from 'socket.io-client';
@@ -20,6 +21,7 @@ class App extends Component {
       updateToggle: false,
       files: [],
       fetchingFiles: true,
+      downloadFileId: null
     }
   }
 
@@ -40,13 +42,19 @@ class App extends Component {
     });
   }
 
+  setDownloadFileId(downloadFileId, callback){
+    this.setState({downloadFileId}, callback);
+    this.setState({});
+  }
+
   render() {
     return (
         <MuiThemeProvider theme={theme}>
           <TopBar/>
-          <FileList files={this.state.files} fetchingFiles={this.state.fetchingFiles}/>
+          <FileList files={this.state.files} fetchingFiles={this.state.fetchingFiles} setDownloadFileId={this.setDownloadFileId.bind(this)}/>
           <UploadFileButton/>
           <Snackbar message="File Deleted" identity="deleted"/>
+          <FileDownloadForm fileId={this.state.downloadFileId}/>
         </MuiThemeProvider>
     );
   }

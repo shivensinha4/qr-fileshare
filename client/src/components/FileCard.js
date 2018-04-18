@@ -14,15 +14,14 @@ class FileCard extends Component {
     this.file = props.file;
     this.fileName = props.file.originalname;
     this.size = props.file.size;
-    this.data = props.file.buffer.data;
+    this.isPreviewable = true;
+    props.file.buffer ?
+        this.data = props.file.buffer.data :
+        this.isPreviewable = false;
     this.mimeType = props.file.mimetype;
-    this.isImage = this.isImageType(this.file);
+    this.setDownloadFileId = props.setDownloadFileId;
     this.state = {shadow: 1};
   }
-
-  isImageType = () => {
-    return this.file.mimetype.split("/")[0] === "image";
-  };
 
   generateDataURI = () => {
     return `data:${this.mimeType};base64,${arrayBufferToBase64(this.data)}`;
@@ -49,14 +48,17 @@ class FileCard extends Component {
   };
 
   downloadFile = () => {
-    const blobData = new Uint8Array(this.data);
+    /*const blobData = new Uint8Array(this.data);
     const blob = new Blob([blobData], {type: this.mimeType}),
         downloadLink = document.createElement('a');
 
     downloadLink.href = window.URL.createObjectURL(blob);
     console.log(downloadLink.href);
     downloadLink.download = this.fileName;
-    downloadLink.click();
+    downloadLink.click();*/
+    this.setDownloadFileId(this.file.id, () => {
+      document.getElementById('fileDownloadLink').click();
+    });
   };
 
   deleteFile = (evt) => {
@@ -77,11 +79,11 @@ class FileCard extends Component {
             <Card onMouseOver={this.onMouseOver}
                   onMouseOut={this.onMouseOut}
                   onClick={this.downloadFile}
-                  className={"fileCard " + (!this.isImage && "noImage")}
+                  className={"fileCard " + (!this.isPreviewable && "noImage")}
                   elevation={this.state.shadow}>
               <Grid container spacing={0}>
                 <Grid item className="details" xs={7}>
-                  <CardContent className={"fileCardContent " + (!this.isImage ? "noImage" : "")}>
+                  <CardContent className={"fileCardContent " + (!this.isPreviewable ? "noImage" : "")}>
                     <Typography className="fileName" variant="subheading" color="inherit" noWrap
                                 style={{maxWidth: "calc(100% - 32px)"}}>
                     <span className="fileNameText">
@@ -104,7 +106,7 @@ class FileCard extends Component {
                 </Grid>
                 <Grid item className="details" xs={5}>
                   {
-                    this.isImage &&
+                    this.isPreviewable &&
                     <CardMedia image={this.generateDataURI(this.file)} className="fileCardImage"/>
                   }
                 </Grid>

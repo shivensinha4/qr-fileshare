@@ -11,6 +11,7 @@ class FileList extends Component {
     super(props);
     this.files = props.files;
     this.fetchingFiles = props.fetchingFiles;
+    this.setDownloadFileId = props.setDownloadFileId;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,7 +34,7 @@ class FileList extends Component {
 
     const fileCards = this.files.map((file) =>
         <Grid item key={file.id} className="fileListGridItem" xs={12} md={6}>
-          <FileCard file={file}/>
+          <FileCard file={file} setDownloadFileId={this.setDownloadFileId}/>
         </Grid>
     );
 
