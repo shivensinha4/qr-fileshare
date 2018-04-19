@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "client-dev": "cd client && yarn start -o",
     "server-dev": "nodemon --ignore 'client/'",
-    "dev": "concurrently --kill-others-on-fail \"yarn client-dev\" \"yarn server-dev\""
+    "dev": "concurrently --kill-others-on-fail \"yarn client-dev\" \"yarn server-dev\"",
+    "client-build": "cd client && yarn build",
+    "build-start": "cd client && yarn build && cd .. && node index.js",
+    "start": "node index.js"
   },
   "author": "Shiven Sinha",
   "license": "ISC",

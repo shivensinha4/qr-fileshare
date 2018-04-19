@@ -1,4 +1,3 @@
 node_modules
 client/node_modules
 .node-persist
-.gitignore
