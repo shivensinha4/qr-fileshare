@@ -12,13 +12,14 @@ const path = require('path');
 // Clear Uploads
 const directory = 'uploads';
 fs.readdir(directory, (err, files) => {
-  if (err) throw err;
-
-  for (const file of files) {
-    fs.unlink(path.join(directory, file), err => {
-      if (err) throw err;
-    });
-  }
+  // Skipping error because it simply means that the directry is not created yet. It will be fixed automatically later.
+  if (!err) {
+    for (const file of files) {
+      fs.unlink(path.join(directory, file), err => {
+        if (err) throw err;
+      });
+    }
+  };
 });
 
 app.locals.files = [];
@@ -50,7 +51,7 @@ getInterfaceAddress().then((address) => {
 });
 
 const displayQrCode = (address) => {
-  const qr_image = qr.imageSync(address, {parse_url: true, size: 1, margin: 3, ec_level: 'H'});
+  const qr_image = qr.imageSync(address, { parse_url: true, size: 1, margin: 3, ec_level: 'H' });
   pngStringify(qr_image, (err, pngStr) => {
     if (err) throw err;
     console.log(pngStr);
