@@ -11,7 +11,7 @@ class FileDownloadForm extends Component {
   }
 
   render() {
-    let url = `https://localhost:8000/api/file/${this.fileId}`;
+    let url = `/api/file/${this.fileId}`;
 
     return (
         <a href={url} download id="fileDownloadLink"/>

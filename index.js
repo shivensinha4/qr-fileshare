@@ -33,11 +33,12 @@ app.use(function (req, res, next) {
 });
 
 const createServer = (address) => {
-  // app.listen(0, address,
-  let server = app.listen(8000, () => {
-    const address = `http://${server.address().address}:${server.address().port}`;
-    console.log(address);
-    displayQrCode(address);
+  // app.listen(8000,
+  let server = app.listen(0, address, () => {
+    const serverAcquiredAddress = `http://${server.address().address}:${server.address().port}`;
+    console.log(serverAcquiredAddress);
+    displayQrCode(serverAcquiredAddress);
+    opn(serverAcquiredAddress);
     app.locals.fileCount = 0; // Store the number of files, useful for generating new ids
     storage.init();
     storage.clear();

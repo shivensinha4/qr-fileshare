@@ -7,6 +7,7 @@ const rl = readline.createInterface({
   terminal: false
 });
 let config = require('../config.json');
+
 const interfaceAddresses = {};
 const interfaceIndexPattern = /\[?(\d)]?/g;
 
@@ -33,17 +34,20 @@ const getInterfaceAddress = (resolve) => {
     });
   });
 
-  // If interface name has already been configured earlier, return the appropriate address
-  if (config.chosenInterfaceName){
+  // If interface name has already been configured earlier and is a valid interface name on this OS, return the appropriate address
+  if (Object.keys(interfaceAddresses).includes(config.chosenInterfaceName)){
     console.log("Using pre-selected interface:", config.chosenInterfaceName);
     resolve(interfaceAddresses[config.chosenInterfaceName]);
     return;
   }
 
   // If interface has not been selected, prompt to select one
+  // List all interfaces
   Object.keys(interfaceAddresses).forEach((interfaceName, index) => {
     console.log(`[${index}] ${interfaceName}`);
   });
+
+  // Prompt
   rl.question("Choose the interface [index]: ", (chosenIndex) => {
     chosenIndex = Number(interfaceIndexPattern.exec(chosenIndex)[1]);
     const chosenInterfaceName = Object.keys(interfaceAddresses)[chosenIndex];
@@ -52,6 +56,7 @@ const getInterfaceAddress = (resolve) => {
       process.exit();
     }
     config = {chosenInterfaceName};
+    console.log(config);
     fs.writeFile('./config.json', JSON.stringify(config), () => {}); // Update config file
     rl.close();
     resolve(interfaceAddresses[config.chosenInterfaceName]);
