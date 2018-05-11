@@ -48,14 +48,6 @@ class FileCard extends Component {
   };
 
   downloadFile = () => {
-    /*const blobData = new Uint8Array(this.data);
-    const blob = new Blob([blobData], {type: this.mimeType}),
-        downloadLink = document.createElement('a');
-
-    downloadLink.href = window.URL.createObjectURL(blob);
-    console.log(downloadLink.href);
-    downloadLink.download = this.fileName;
-    downloadLink.click();*/
     this.setDownloadFileId(this.file.id, () => {
       document.getElementById('fileDownloadLink').click();
     });

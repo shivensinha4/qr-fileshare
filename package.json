@@ -6,11 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "client-dev": "cd client && yarn start -o",
-    "server-dev": "nodemon index.js --ignore client/ --ignore config.json",
+    "server-dev": "set NODE_ENV=development && nodemon index.js --ignore client/ --ignore config.json",
     "dev": "concurrently --kill-others-on-fail \"yarn client-dev\" \"yarn server-dev\"",
     "client-build": "cd client && yarn build",
-    "build-start": "cd client && yarn build && cd .. && node index.js",
-    "start": "node index.js"
+    "build-start": "cd client && yarn build && cd .. && yarn start",
+    "start": "set NODE_ENV=production && node index.js"
   },
   "author": "Shiven Sinha",
   "license": "ISC",
