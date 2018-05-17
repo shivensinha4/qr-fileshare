@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+// TODO: Implement Search Bar
 const opn = require('opn');
 const express = require('express');
 const app = express();
@@ -8,7 +10,7 @@ const route = require('./server/routes');
 const storage = require('node-persist');
 const fs = require('fs');
 const path = require('path');
-const devEnv = process.env.NODE_ENV.trim() === 'development';
+const devEnv = process.env.NODE_ENV && process.env.NODE_ENV.trim() === 'development';
 
 // Clear Uploads
 const directory = 'uploads';
@@ -38,8 +40,6 @@ const createServer = (address) => {
   if (devEnv) {
     options = [8000];
   }
-
-  console.log(options);
 
   let server = app.listen(...options, () => {
     const serverAcquiredAddress = `http://${server.address().address}:${server.address().port}`;

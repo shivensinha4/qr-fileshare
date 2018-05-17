@@ -58,7 +58,7 @@ class UploadFileButton extends Component {
             }
           </Button>
           <form action="#" id="fileUploadForm">
-            <input type='file' id="fileHiddenInput" name="file" hidden onChange={this.fileInputChange}/>
+            <input type='file' id="fileHiddenInput" name="file" hidden multiple onChange={this.fileInputChange}/>
           </form>
           <Snackbar message="File Uploaded" identity="uploaded"/>
         </div>

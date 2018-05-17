@@ -6,54 +6,63 @@ const storage = multer.diskStorage({
     cb(null, `${file.originalname}-${Date.now()}`);
   }
 });
-const upload = multer({ storage });
+const upload = multer({storage});
 
 module.exports = (app) => {
-  const storage = require('../index').storage;
+  const persistentStorage = require('../index').storage;
 
   // Get list of all files
   app.get('/api/files/', (req, res) => {
-    getFileArrayFromStorage(storage)
-      .then(files => res.json(files))
-      .catch(err => res.send(err));
+    getFileArrayFromStorage(persistentStorage)
+        .then(files => res.json(files))
+        .catch(err => res.send(err));
   });
 
   // Download file
   app.get('/api/file/:fileId', (req, res) => {
-    storage.get(req.params.fileId)
-      .then(fileObject => {
-        const options = {
-          headers: {
-            'Content-type': fileObject.mimetype
-          }
-        };
-        res.download(fileObject.path, fileObject.originalname, options);
-      })
+    persistentStorage.get(req.params.fileId)
+        .then(fileObject => {
+          const options = {
+            headers: {
+              'Content-type': fileObject.mimetype
+            }
+          };
+          res.download(fileObject.path, fileObject.originalname, options);
+        })
   });
 
   // Upload
-  app.post('/api/files/', upload.single("file"), (req, res) => {
+  app.post('/api/files/', upload.array('file'), (req, res) => {
     try {
-      storage.setItem(app.locals.fileCount.toString(), { ...req.file, id: app.locals.fileCount }).then(() => {
-        app.locals.fileCount++;
+      let initialCount = app.locals.fileCount;
+      let newFilesDetails = req.files.map((file) => {
+        return {...file, id: app.locals.fileCount++} // Increase the count too
+      });
 
-        getFileArrayFromStorage(storage)
-          .then(files => {
-            app.locals.io.emit('file list update', JSON.stringify(files));
-          })
-          .catch(err => res.send(err));
+      // Update the list of files in persistent persistentStorage
+      // First create list of promises, then proceed on completion of all
+      let persistentStoragePromises = newFilesDetails.map((fileInfo) =>
+          persistentStorage.setItem((initialCount++).toString(), fileInfo)
+      );
 
+      Promise.all(persistentStoragePromises).then(() => {
+        getFileArrayFromStorage(persistentStorage)
+            .then(files => {
+              app.locals.io.emit('file list update', JSON.stringify(files));
+            })
+            .catch(err => res.send(err));
         res.sendStatus(201);
       });
+
     } catch (e) {
       res.send(e);
     }
   });
 
-  // Delete
+// Delete
   app.delete('/api/file/:fileId', (req, res) => {
-    storage.removeItem(req.params.fileId).then(() => {
-      getFileArrayFromStorage(storage).then(files => {
+    persistentStorage.removeItem(req.params.fileId).then(() => {
+      getFileArrayFromStorage(persistentStorage).then(files => {
         app.locals.io.emit('file list update', JSON.stringify(files));
         res.sendStatus(204);
       })
@@ -69,15 +78,15 @@ const isPreviewableImage = (file) => {
 
 const getFileArrayFromStorage = (storage) => {
   return storage.values()
-    .then(filesObject => {
-      return Object.values(filesObject).map(file => {
-        const sendData = isPreviewableImage(file);
-        if (sendData) {
-          const buffer = fs.readFileSync(file.path);
-          file.buffer = buffer;
-        }
+      .then(filesObject => {
+        return Object.values(filesObject).map(file => {
+          const sendData = isPreviewableImage(file);
+          if (sendData) {
+            const buffer = fs.readFileSync(file.path);
+            file.buffer = buffer;
+          }
 
-        return file;
-      })
-    });
+          return file;
+        })
+      });
 };
