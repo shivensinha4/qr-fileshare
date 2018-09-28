@@ -4,7 +4,7 @@
   <img src="/assets/web-desktop-screenshot.png?raw=true">
 </p>
 <p align="center">
-  <img height="640" src="/assets/web-mobile-screenshot.png">
+  <img height="640" src="/assets/web-mobile-screenshot.png?raw=true">
 </p>
 
 A browser based application created using NodeJS and React to quickly transfer files to a different device on the same WiFi network by utilizing a random port on the selected network interface. The URL is made easily accessible by generating a QR code which is printed in the terminal.
