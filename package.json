@@ -1,6 +1,6 @@
 {
   "name": "qr-fileshare",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Quickly transfer files to a different device via a web interface",
   "main": "index.js",
   "bin": {
@@ -25,6 +25,7 @@
   "keywords": [
     "file",
     "share",
+    "fileshare"
     "qr",
     "terminal",
     "browser"
