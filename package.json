@@ -15,6 +15,14 @@
     "build-start": "cd client && yarn build && cd .. && yarn start",
     "start": "set NODE_ENV=production && node index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivensinha4/qr-fileshare.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shivensinha4/qr-fileshare/issues"
+  },
+  "homepage": "https://github.com/shivensinha4/qr-fileshare#readme",
   "author": "Shiven Sinha <shivensinha4@gmail.com>",
   "license": "MIT",
   "dependencies": {
@@ -28,6 +36,6 @@
     "socket.io-client": "^2.1.0"
   },
   "devDependencies": {
-    "concurrently": "^3.5.1"
+    "concurrently": "^4.0.1"
   }
 }
