@@ -1,7 +1,7 @@
 {
   "name": "qr-fileshare",
   "version": "0.0.1",
-  "description": "Browser based application to quickly transfer files to a different device on the same WiFi network",
+  "description": "Quickly transfer files to a different device via a web interface",
   "main": "index.js",
   "bin": {
     "fileshare": "./index.js"
