@@ -1,6 +1,8 @@
 # QR Fileshare
 
-![Desktop Web Screenshot](assets/web-desktop-screenshot.png?raw=true)
+<p align="center">
+  <img src="/assets/web-desktop-screenshot.png?raw=true">
+</p>
 <p align="center">
   <img height="640" src="/assets/web-mobile-screenshot.png">
 </p>
