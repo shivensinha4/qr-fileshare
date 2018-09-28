@@ -18,4 +18,6 @@ The first time it is run, it prompts for selecting an interface. After that, it 
 
 A link is then opened in the browser with the web UI. Scan the QR code to open the link on mobile.
 
-![Mobile Web Screenshot](assets/web-mobile-screenshot.png?raw=true){:height="50%" width="50%"}
+<p align="center">
+  <img width="460" src="/assets/web-mobile-screenshot.png">
+</p>
