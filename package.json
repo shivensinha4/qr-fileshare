@@ -1,7 +1,7 @@
 {
   "name": "qr-fileshare",
   "version": "0.0.1",
-  "description": "",
+  "description": "Browser based application to quickly transfer files to a different device on the same WiFi network",
   "main": "index.js",
   "bin": {
     "fileshare": "./index.js"
@@ -15,8 +15,8 @@
     "build-start": "cd client && yarn build && cd .. && yarn start",
     "start": "set NODE_ENV=production && node index.js"
   },
-  "author": "Shiven Sinha",
-  "license": "ISC",
+  "author": "Shiven Sinha <shivensinha4@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "console-png": "^1.2.1",
     "express": "^4.16.3",

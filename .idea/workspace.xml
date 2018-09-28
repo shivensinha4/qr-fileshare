@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="108d8977-3cf1-49f3-81ee-f3e26f8895d5" name="Default" comment="Feature provisions for multiple uploads and drag-and-drop.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Snackbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Snackbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/UploadFIleButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UploadFileButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes.js" afterDir="false" />
-    </list>
+    <list default="true" id="108d8977-3cf1-49f3-81ee-f3e26f8895d5" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -288,7 +279,7 @@
       <workItem from="1526051297732" duration="2122000" />
       <workItem from="1526104059097" duration="811000" />
       <workItem from="1526468275103" duration="161000" />
-      <workItem from="1526580676996" duration="7844000" />
+      <workItem from="1526580676996" duration="8056000" />
     </task>
     <task id="LOCAL-00001" summary="Updated index.js to work as per environment">
       <created>1526052935036</created>
@@ -297,15 +288,21 @@
       <option name="project" value="LOCAL" />
       <updated>1526052935036</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Feature provisions for multiple uploads and drag-and-drop.">
+      <created>1526589325340</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1526589325340</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122935000" />
+    <option name="totallyTimeSpent" value="123147000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18441065" />
       <window_info anchor="bottom" id="TODO" order="6" />
