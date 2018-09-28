@@ -1,14 +1,11 @@
 {
   "name": "qr-fileshare",
-  "version": "0.0.7",
+  "version": "0.1.1",
   "description": "Quickly transfer files to a different device via a web interface",
   "main": "index.js",
   "bin": {
     "qr-fileshare": "./index.js"
   },
-  "files": [
-    "client/build"
-  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "client-dev": "cd client && yarn start -o",
