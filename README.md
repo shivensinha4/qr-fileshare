@@ -18,7 +18,7 @@ npm install -g qr-fileshare
 ## Usage
 In the terminal, run
 ```shell
-fileshare
+qr-fileshare
 ```
 The first time it is run, it prompts for selecting an interface. After that, it defaults to the same interface if available.
 
