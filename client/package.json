@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "material-ui": "^1.0.0-beta.39",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1"
+    "material-ui": "^1.0.0-beta.46",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-scripts": "^2.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
