@@ -9,6 +9,8 @@
 
 A browser based application created using NodeJS and React to quickly transfer files to a different device on the same WiFi network by utilizing a random port on the selected network interface. The URL is made easily accessible by generating a QR code which is printed in the terminal.
 
+All zoom-zoom.
+
 ## Installation
 Install it via NPM.
 ```shell
