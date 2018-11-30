@@ -27,8 +27,6 @@ fs.readdir(directory, (err, files) => {
 
 app.locals.files = [];
 
-// Serve from React's build
-app.use("/", express.static(__dirname + '/client/build/'));
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -62,7 +60,7 @@ function displayQrCode(address) {
   const qr_image = qr.imageSync(address, {parse_url: true, size: 1, margin: 3, ec_level: 'H'}),
       qr_svg = qr.image(address, { type: 'svg' });
 
-  qr_svg.pipe(require('fs').createWriteStream('client/src/generated_qr.svg'));
+  qr_svg.pipe(require('fs').createWriteStream('generated_qr.svg'));
 
   pngStringify(qr_image, (err, pngStr) => {
     if (err) throw err;
@@ -77,5 +75,8 @@ function configureApp() {
 function configureSocketServer(server) {
   app.locals.io = require('socket.io').listen(server);
 }
+
+// Serve from React's build
+app.use("/", express.static(path.join(__dirname, 'client', 'build')));
 
 exports.storage = storage;

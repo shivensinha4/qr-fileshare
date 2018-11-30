@@ -1,5 +1,6 @@
 const fs = require('fs');
 const multer = require('multer');
+const express = require('express');
 const storage = multer.diskStorage({
   destination: 'uploads/',
   filename: (req, file, cb) => {
@@ -10,6 +11,9 @@ const upload = multer({storage});
 
 module.exports = (app) => {
   const persistentStorage = require('../index').storage;
+
+  // Generated QR Image
+  app.use('/generated_qr.svg', express.static('generated_qr.svg'));
 
   // Get list of all files
   app.get('/api/files/', (req, res) => {
@@ -82,8 +86,7 @@ const getFileArrayFromStorage = (storage) => {
         return Object.values(filesObject).map(file => {
           const sendData = isPreviewableImage(file);
           if (sendData) {
-            const buffer = fs.readFileSync(file.path);
-            file.buffer = buffer;
+            file.buffer = fs.readFileSync(file.path);
           }
 
           return file;

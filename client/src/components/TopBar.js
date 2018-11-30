@@ -3,7 +3,6 @@ import '../styles/TopBar.css';
 import Typography from 'material-ui/Typography';
 import blue from 'material-ui/colors/blue';
 import Modal from 'material-ui/Modal';
-import qrCode from '../generated_qr.svg';
 
 class App extends React.Component {
   constructor() {
@@ -38,7 +37,7 @@ class App extends React.Component {
               onClose={this.handleClose}
           >
             <div>
-              <img id="qrCode" src={qrCode} alt="QR Code"/>
+              <img id="qrCode" src='/generated_qr.svg' alt="QR Code"/>
             </div>
           </Modal>
         </div>
