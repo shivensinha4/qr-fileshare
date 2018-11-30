@@ -1,6 +1,8 @@
 node_modules
 client/node_modules
 .node-persist
+generated_qr.svg
+client/src/generated_qr.svg
 yarn.lock
 uploads
 .idea

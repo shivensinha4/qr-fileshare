@@ -1,11 +1,34 @@
 #topBar {
     height: 20vh;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #topBarHead {
     margin-left: 5%;
     font-weight: 300;
-    color: #fff;
+    color: #FFF;
+    margin-bottom: 0.5rem;
+}
+
+#topBarQrLink {
+    font-size: 0.8rem;
+    margin-left: 5.5%;
+    color: #F1F1F1;
+    transition: color 0.2s ease;
+    cursor: pointer;
+}
+
+#topBarQrLink:hover {
+    color: #FFF;
+}
+
+#qrCode {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 20rem;
+    transform: translate(-50%, -50%);
+    background: #FFF;
 }
