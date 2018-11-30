@@ -10,7 +10,7 @@ class App extends React.Component {
     super();
 
     this.state = {
-      modalIsOpen: true
+      modalIsOpen: false
     };
   }
 
