@@ -39,14 +39,14 @@ const createServer = (address) => {
     options = [8000];
   }
 
-  let server = app.listen(...options, () => {
+  let server = app.listen(...options, async () => {
     const serverAcquiredAddress = `http://${server.address().address}:${server.address().port}`;
     console.log(serverAcquiredAddress);
     displayQrCode(serverAcquiredAddress);
     !devEnv && opn(serverAcquiredAddress);
     app.locals.fileCount = 0; // Store the number of files, useful for generating new ids
-    storage.init();
-    storage.clear();
+    await storage.init();
+    await storage.clear();
     configureApp();
     configureSocketServer(server);
   });
