@@ -27,17 +27,15 @@ fs.readdir(directory, (err, files) => {
 
 app.locals.files = [];
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
-const createServer = (address) => {
+const createServer = address => {
   let options = [0, address];
-  if (devEnv) {
-    options = [8000];
-  }
+  if (devEnv) options = [8000]
 
   let server = app.listen(...options, async () => {
     const serverAcquiredAddress = `http://${server.address().address}:${server.address().port}`;
@@ -52,11 +50,11 @@ const createServer = (address) => {
   });
 };
 
-getInterfaceAddress().then((address) => {
+getInterfaceAddress().then(address => {
   createServer(address);
 });
 
-function displayQrCode(address) {
+const displayQrCode = address => {
   const qr_image = qr.imageSync(address, {parse_url: true, size: 1, margin: 3, ec_level: 'H'}),
       qr_svg = qr.image(address, { type: 'svg' });
 
@@ -68,11 +66,11 @@ function displayQrCode(address) {
   });
 }
 
-function configureApp() {
+const configureApp = () => {
   route(app);
 }
 
-function configureSocketServer(server) {
+const configureSocketServer = server => {
   app.locals.io = require('socket.io').listen(server);
 }
 
