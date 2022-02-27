@@ -1,9 +1,6 @@
 # QR Fileshare [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Quickly%20transfer%20files%20to%20a%20different%20device,%20via%20a%20neat%20interface.&url=https://github.com/shivensinha4/qr-fileshare&via=sinha_shiven&hashtags=opensource,github,tool,npm,node,react)
 
 <p align="center">
-  <img src="/assets/web-desktop-screenshot.png?raw=true">
-</p>
-<p align="center">
   <img height="600" src="/assets/web-mobile-screenshot.png?raw=true">
 </p>
 
