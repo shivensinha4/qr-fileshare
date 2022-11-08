@@ -6,7 +6,7 @@
     "material-ui": "^1.0.0-beta.46",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-scripts": "^2.0.1"
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
